@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const LeftNavContainer = styled.nav`
   color: ${props => (props.isDark ? '#fff' : '#181818')};
-  background-color: ${props => (props.isDark ? '#fff' : '#181818')};
+  background-color: ${props => (props.isDark ? '#181818' : '#f9f9f9')};
   width: 16vw;
   display: flex;
   padding-right: 30px;
@@ -15,7 +15,7 @@ export const LeftNavContainer = styled.nav`
 `
 
 export const Paragraph = styled.p`
-  color: ${props => (props.isDark ? '#181818' : '#fff')};
+  color: ${props => (props.isDark ? '#fff' : '#181818')};
   padding: 0px;
   font-family: 'Roboto';
   margin: 0;

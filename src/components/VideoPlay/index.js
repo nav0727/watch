@@ -3,6 +3,8 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import ReactPlayer from 'react-player'
+import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
+import {BiListPlus} from 'react-icons/bi'
 
 import {formatDistanceToNow} from 'date-fns'
 
@@ -10,8 +12,18 @@ import {Bg} from '../Trending/styledComponents'
 import Header from '../Header'
 import NavBar from '../NavBar'
 import {RowContainer} from '../LoginForm/styleComponents'
-import {LoaderContainer, FailImg} from '../Home/styleComponents'
-import {PlayContainer, PlayImg} from './styleComponents'
+import {
+  LoaderContainer,
+  FailImg,
+  RowJustContainer,
+} from '../Home/styleComponents'
+import {
+  PlayContainer,
+  PlayImg,
+  LikeBtn,
+  DislikeBtn,
+  SaveBtn,
+} from './styleComponents'
 
 const play = {
   success: 'SUCCESS',
@@ -20,9 +32,19 @@ const play = {
 }
 
 class VideoPlay extends Component {
-  state = {playArray: [], playStatus: play.loading}
+  state = {
+    playArray: [],
+    playStatus: play.loading,
+    like: false,
+    dislike: false,
+    isSave: false,
+  }
 
   componentDidMount() {
+    this.getPlayVideo()
+  }
+
+  renderRetry = () => {
     this.getPlayVideo()
   }
 
@@ -66,8 +88,20 @@ class VideoPlay extends Component {
     }
   }
 
+  onLike = () => {
+    this.setState({like: true, dislike: false})
+  }
+
+  onDislike = () => {
+    this.setState({like: false, dislike: true})
+  }
+
+  onSave = () => {
+    this.setState(prev => ({isSave: !prev.isSave}))
+  }
+
   renderPlayVideo = () => {
-    const {playArray} = this.state
+    const {playArray, like, dislike, isSave} = this.state
 
     const {
       playId,
@@ -93,10 +127,32 @@ class VideoPlay extends Component {
         />
         <p>{playTitle}</p>
         <div id={playId}>
-          <RowContainer>
-            <p>{playViewCount} views </p>
-            <p> .{formatDistanceToNow(new Date(playPublished))} ago</p>
-          </RowContainer>
+          <RowJustContainer>
+            <RowContainer>
+              <p>{playViewCount} views </p>
+              <p> .{formatDistanceToNow(new Date(playPublished))} ago</p>
+            </RowContainer>
+            <RowContainer>
+              <RowContainer>
+                <LikeBtn type="button" like={like} onClick={this.onLike}>
+                  <AiOutlineLike />
+                  Like
+                </LikeBtn>
+                <DislikeBtn
+                  type="button"
+                  isDislike={dislike}
+                  onClick={this.onDislike}
+                >
+                  <AiOutlineDislike />
+                  Dislike
+                </DislikeBtn>
+                <SaveBtn type="button" onClick={this.onSave} isSave={isSave}>
+                  <BiListPlus />
+                  {isSave ? 'Saved' : 'Save'}
+                </SaveBtn>
+              </RowContainer>
+            </RowContainer>
+          </RowJustContainer>
           <hr />
           <RowContainer>
             <PlayImg src={playProf} alt="profile" />
@@ -115,7 +171,7 @@ class VideoPlay extends Component {
   }
 
   renderLoading = () => (
-    <LoaderContainer>
+    <LoaderContainer data-testid="loader">
       <Loader type="ThreeDots" color="#fa2" height="50" width="50" />
     </LoaderContainer>
   )
@@ -130,13 +186,15 @@ class VideoPlay extends Component {
               ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
               : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
           }
-          alt="failure"
+          alt="failure view"
         />
         <h1>Oops! Something Went Wrong</h1>
         <p>
           We are having some trouble to complete your request. Please try again.
         </p>
-        <button type="button">Retry</button>
+        <button type="button" onClick={this.renderRetry}>
+          Retry
+        </button>
       </LoaderContainer>
     )
   }

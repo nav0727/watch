@@ -2,8 +2,8 @@
 import styled from 'styled-components'
 
 export const HeadContainer = styled.nav`
-  background-color: ${props => (props.isDark ? '#fff' : '#020202')};
-  color: ${props => (props.isDark ? '#020202' : '#fff')};
+  background-color: ${props => (props.isDark ? '#020202' : '#fff')};
+  color: ${props => (props.isDark ? '#fff' : '#020202')};
   display: flex;
   align-items: center;
   height: 10vh;
@@ -21,7 +21,7 @@ export const ButtonBg = styled.button`
   border: none;
   outline: none;
   margin-right: 10px;
-  color: ${props => (props.isDark ? '#181818' : '#fff')};
+  color: ${props => (props.isDark ? '#fff' : '#181818')};
   font-size: 25px;
 `
 export const Logout = styled.button`

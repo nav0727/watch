@@ -75,7 +75,7 @@ class Gaming extends Component {
   }
 
   renderLoading = () => (
-    <LoaderContainer>
+    <LoaderContainer data-testid="loader">
       <Loader type="ThreeDots" color="#fa2" height="50" width="50" />
     </LoaderContainer>
   )
@@ -90,7 +90,7 @@ class Gaming extends Component {
               ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
               : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
           }
-          alt="failure"
+          alt="failure view"
         />
         <h1>Oops! Something Went Wrong</h1>
         <p>
@@ -117,8 +117,8 @@ class Gaming extends Component {
             const {isDark} = value
             return (
               <Link to={`/videos/${gameId}`} style={{textDecoration: 'none'}}>
-                <GameLiContainer>
-                  <GameImg src={gameThumb} alt="gaming" />
+                <GameLiContainer isDark={isDark} data-testid="videoItemDetails">
+                  <GameImg src={gameThumb} alt="video thumbnail" />
 
                   <ColContainer>
                     <Para isDark={isDark}>{gameTitle}</Para>

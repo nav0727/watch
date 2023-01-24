@@ -117,7 +117,7 @@ class Home extends Component {
               ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
               : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
           }
-          alt="failure"
+          alt="failure view"
         />
         <h1>Oops! Something Went Wrong</h1>
         <p>
@@ -156,7 +156,7 @@ class Home extends Component {
                 to={`/videos/${allVideosId}`}
                 style={{textDecoration: 'none'}}
               >
-                <HomeLiContainer>
+                <HomeLiContainer isDark={isDark}>
                   <ThumbImg src={allVideosThumb} alt="video thumbnail" />
 
                   <RowContainer>
@@ -184,27 +184,34 @@ class Home extends Component {
     }
 
     return (
-      <BodyContainer>
-        {allVideoArray.length === 0 ? (
-          <LoaderContainer>
-            <FailImg
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
-              alt="no videos"
-            />
-            <h1>No Search results found</h1>
-            <p>Try different key words or remove search filter</p>
-            <RetryBtn type="button" onClick={this.renderRetry}>
-              Retry
-            </RetryBtn>
-          </LoaderContainer>
-        ) : (
-          <HomeUlContainer>
-            {allVideoArray.map(each => (
-              <VideoItem key={each.allVideosId} videoItem={each} />
-            ))}
-          </HomeUlContainer>
-        )}
-      </BodyContainer>
+      <NxtContext.Consumer>
+        {value => {
+          const {isDark} = value
+          return (
+            <BodyContainer isDark={isDark}>
+              {allVideoArray.length === 0 ? (
+                <LoaderContainer>
+                  <FailImg
+                    src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+                    alt="no videos"
+                  />
+                  <h1>No Search results found</h1>
+                  <p>Try different key words or remove search filter</p>
+                  <RetryBtn type="button" onClick={this.renderRetry}>
+                    Retry
+                  </RetryBtn>
+                </LoaderContainer>
+              ) : (
+                <HomeUlContainer>
+                  {allVideoArray.map(each => (
+                    <VideoItem key={each.allVideosId} videoItem={each} />
+                  ))}
+                </HomeUlContainer>
+              )}
+            </BodyContainer>
+          )
+        }}
+      </NxtContext.Consumer>
     )
   }
 
@@ -238,49 +245,61 @@ class Home extends Component {
   render() {
     const {hide, searchIp} = this.state
     return (
-      <Bg>
-        <Header />
-        <RowContainer>
-          <LeftNav />
-          <div>
-            {hide && (
-              <BodyBoxContainer>
-                <RowJustContainer>
-                  <NxtImg
-                    src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                    alt="nxt watch logo"
-                  />
-                  <CancelBtn type="button" onClick={this.bgHide}>
-                    <BiX />
-                  </CancelBtn>
-                </RowJustContainer>
-                <p>
-                  Buy Nxt Watch Premium prepaid plans with
-                  <br /> UPI
-                </p>
-                <GetBtn type="button">GET IT NOW</GetBtn>
-              </BodyBoxContainer>
-            )}
-            <SearchContainer>
-              <InputContainer
-                type="search"
-                onChange={this.onSearch}
-                placeholder="Search"
-                value={searchIp}
-              />
-              <CancelBtn
-                type="button"
-                onClick={this.renderSearch}
-                data-testid="searchButton"
-              >
-                <BsSearch />
-              </CancelBtn>
-            </SearchContainer>
+      <NxtContext.Consumer>
+        {value => {
+          const {isDark} = value
 
-            {this.renderVideos()}
-          </div>
-        </RowContainer>
-      </Bg>
+          return (
+            <Bg isDark={isDark}>
+              <Header />
+              <RowContainer>
+                <LeftNav />
+                <div>
+                  {hide && (
+                    <BodyBoxContainer data-testid="banner">
+                      <RowJustContainer>
+                        <NxtImg
+                          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+                          alt="nxt watch logo"
+                        />
+                        <CancelBtn
+                          type="button"
+                          onClick={this.bgHide}
+                          data-testid="close"
+                        >
+                          <BiX />
+                        </CancelBtn>
+                      </RowJustContainer>
+                      <p>
+                        Buy Nxt Watch Premium prepaid plans with
+                        <br /> UPI
+                      </p>
+                      <GetBtn type="button">GET IT NOW</GetBtn>
+                    </BodyBoxContainer>
+                  )}
+                  <SearchContainer>
+                    <InputContainer
+                      type="search"
+                      onChange={this.onSearch}
+                      placeholder="Search"
+                      value={searchIp}
+                    />
+                    <CancelBtn
+                      type="button"
+                      onClick={this.renderSearch}
+                      data-testid="searchButton"
+                    >
+                      <BsSearch />
+                    </CancelBtn>
+                  </SearchContainer>
+
+                  {this.renderVideos()}
+                </div>
+              </RowContainer>
+            </Bg>
+          )
+        }}
+      </NxtContext.Consumer>
     )
   }
 }

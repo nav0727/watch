@@ -6,6 +6,8 @@ export const GameLiContainer = styled.li`
   display: flex;
   flex-direction: column;
   padding: 2vw;
+  background-color: ${props => (props.isDark ? '#0f0f0f' : '#f9f9f9')};
+
   background-color: transparent;
 `
 export const GameUlContainer = styled.ul`
@@ -24,6 +26,9 @@ export const GameImg = styled.img`
 export const GameBg = styled.div`
   display: flex;
   flex-direction: column;
+  width: 84vw;
+  background-color: ${props => (props.isDark ? '#f9f9f9' : '#0f0f0f')};
+  color: ${props => (props.isDark ? '#0f0f0f' : '#f9f9f9')};
 `
 export const BgGame = styled.div`
   height: 100vh;
@@ -38,7 +43,7 @@ export const GameBodyContainer = styled.div`
   flex-direction: column;
   width: 100%;
   overflow-y: scroll;
-  background-color: ${props => (props.isDark ? '#f9f9f9' : '#0f0f0f')};
+  background-color: ${props => (props.isDark ? '#0f0f0f' : '#f9f9f9')};
 `
 
 export const Para = styled.p`

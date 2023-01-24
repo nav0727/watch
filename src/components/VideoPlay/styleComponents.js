@@ -12,3 +12,26 @@ export const PlayImg = styled.img`
   height: 30px;
   margin: 2vh 2vw;
 `
+
+export const LikeBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  margin-right: 10px;
+  color: ${props => (props.like ? '#2563eb' : '#64748b')};
+  font-size: 15px;
+`
+
+export const DislikeBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  margin-right: 10px;
+  font-size: 15px;
+  color: ${props => (props.isDislike ? '#2563eb' : '#64748b')};
+`
+export const SaveBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  margin-right: 10px;
+  color: ${props => (props.isSave ? '#2563eb' : '#64748b')};
+  font-size: 15px;
+`

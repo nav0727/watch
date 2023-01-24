@@ -81,7 +81,7 @@ class Trending extends Component {
   }
 
   renderLoading = () => (
-    <LoaderContainer>
+    <LoaderContainer data-testid="loader">
       <Loader type="ThreeDots" color="#fa2" height="50" width="50" />
     </LoaderContainer>
   )
@@ -127,7 +127,7 @@ class Trending extends Component {
       return (
         <Link to={`/videos/${TrendId}`} style={{textDecoration: 'none'}}>
           <TrendLiContainer id={TrendId}>
-            <TrendImg src={TrendThumb} alt={TrendName} />
+            <TrendImg src={TrendThumb} alt="video thumbnail" />
 
             <RowContainer>
               <ColContainer>

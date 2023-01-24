@@ -4,10 +4,10 @@ import styled from 'styled-components'
 export const BodyBoxContainer = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
   background-size: cover;
-  height: 20vh;
   padding-top: 2vh;
   background-color: #f9f9f9;
   padding-left: 5vw;
+  padding-bottom: 1vh;
 `
 export const RowJustContainer = styled.div`
   display: flex;
@@ -36,6 +36,8 @@ export const BodyContainer = styled.div`
   flex-direction: column;
   width: 84vw;
   overflow-y: scroll;
+  color: ${props => (props.isDark ? '#fff' : '#212121')};
+  background-color: ${props => (props.isDark ? '#181818' : '#f9f9f9')};
   padding-bottom: 50vh;
 `
 export const HomeUlContainer = styled.ul`
@@ -57,14 +59,15 @@ export const HomeLiContainer = styled.li`
   flex-direction: column;
   width: 310px;
   margin: 20px;
-  color: #181818;
+  color: ${props => (props.isDark ? '#212121' : '#fff')};
+  background-color: ${props => (props.isDark ? '#f9f9f9' : '#181818')};
 `
 
 export const ListPara = styled.p`
   font-size: 12px;
   padding: 2px;
   margin: 2px;
-  color:${props => (props.isDark ? '#fff' : '#323232')}
+  color:${props => (props.isDark ? '#323232' : '#fff')}
   font-weight: 500;
 `
 export const LoaderContainer = styled.div`

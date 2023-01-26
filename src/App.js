@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, Redirect} from 'react-router-dom'
 
 import LoginForm from './components/LoginForm'
 import './App.css'
@@ -11,6 +11,7 @@ import SavedVideos from './components/SavedVideos'
 import VideoPlay from './components/VideoPlay'
 import NxtContext from './context/NxtContext'
 import ProtectedRoute from './components/ProtectedRoute'
+import NotFound from './components/NotFound'
 
 class App extends Component {
   state = {isDark: false}
@@ -30,6 +31,8 @@ class App extends Component {
           <ProtectedRoute exact path="/gaming" component={Gaming} />
           <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
           <ProtectedRoute exact path="/videos/:id" component={VideoPlay} />
+          <ProtectedRoute exact path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
         </Switch>
       </NxtContext.Provider>
     )

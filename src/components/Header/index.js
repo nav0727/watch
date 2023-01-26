@@ -25,10 +25,10 @@ import {
 const Header = props => {
   const onLogout = () => {
     const {history} = props
+    const JWTtoken = Cookies.remove('jwt_token')
+    console.log(JWTtoken)
 
-    const JWTToken = Cookies.remove('jwt_token')
-    console.log(JWTToken)
-    if (JWTToken !== undefined) {
+    if (JWTtoken !== undefined) {
       return history.replace('/')
     }
     return history.replace('/login')

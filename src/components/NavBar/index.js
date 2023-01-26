@@ -1,4 +1,5 @@
 import {Component} from 'react'
+
 import {Link} from 'react-router-dom'
 import {AiFillHome} from 'react-icons/ai'
 import {HiFire} from 'react-icons/hi'
@@ -45,26 +46,7 @@ const ButtonElements = [
 */
 
 class NavBar extends Component {
-  state = {activeId: 'home'}
-
-  homeBtn = () => {
-    this.setState({activeId: 'home'})
-  }
-
-  gameBtn = () => {
-    this.setState({activeId: 'game'})
-  }
-
-  trendBtn = () => {
-    this.setState({activeId: 'trend'})
-  }
-
-  savedBtn = () => {
-    this.setState({activeId: 'saved'})
-  }
-
   render() {
-    const {activeId} = this.state
     return (
       <NxtContext.Consumer>
         {value => {
@@ -74,11 +56,8 @@ class NavBar extends Component {
             <LeftNavContainer isDark={isDark}>
               <ul>
                 <Link to="/" style={{textDecoration: 'none'}}>
-                  <ListItem
-                    activeId={activeId === 'home'}
-                    onClick={this.homeBtn}
-                  >
-                    <Icons type="button" id="home" activeId={activeId}>
+                  <ListItem>
+                    <Icons type="button">
                       <AiFillHome />
                     </Icons>
                     <Paragraph isDark={isDark}>Home</Paragraph>
@@ -86,15 +65,8 @@ class NavBar extends Component {
                 </Link>
 
                 <Link to="/trending" style={{textDecoration: 'none'}}>
-                  <ListItem
-                    activeId={activeId === 'trend'}
-                    onClick={this.trendBtn}
-                  >
-                    <Icons
-                      type="button"
-                      id="trend"
-                      activeId={activeId === 'trend'}
-                    >
+                  <ListItem>
+                    <Icons type="button">
                       <HiFire />
                     </Icons>
                     <Paragraph isDark={isDark}>Trending</Paragraph>
@@ -102,11 +74,8 @@ class NavBar extends Component {
                 </Link>
 
                 <Link to="/gaming" style={{textDecoration: 'none'}}>
-                  <ListItem
-                    activeId={activeId === 'game'}
-                    onClick={this.gameBtn}
-                  >
-                    <Icons type="button" activeId={activeId === 'game'}>
+                  <ListItem>
+                    <Icons type="button">
                       <SiYoutubegaming />
                     </Icons>
                     <Paragraph isDark={isDark}>Gaming</Paragraph>
@@ -114,11 +83,8 @@ class NavBar extends Component {
                 </Link>
 
                 <Link to="/saved-videos" style={{textDecoration: 'none'}}>
-                  <ListItem
-                    activeId={activeId === 'saved'}
-                    onClick={this.savedBtn}
-                  >
-                    <Icons type="button" activeId={activeId === 'saved'}>
+                  <ListItem>
+                    <Icons type="button">
                       <BiListPlus />
                     </Icons>
                     <Paragraph isDark={isDark}>Saved Videos</Paragraph>

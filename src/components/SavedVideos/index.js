@@ -2,12 +2,14 @@ import {Component} from 'react'
 
 import {Link} from 'react-router-dom'
 
+import {AiFillHome} from 'react-icons/ai'
 import {HiFire} from 'react-icons/hi'
+import {SiYoutubegaming} from 'react-icons/si'
+import {BiListPlus} from 'react-icons/bi'
 
 import {formatDistanceToNow} from 'date-fns'
 
 import {ColContainer, RowContainer} from '../LoginForm/styleComponents'
-import NavBar from '../NavBar'
 import Header from '../Header'
 import {
   Bg,
@@ -18,7 +20,17 @@ import {
   TrendUlContainer,
 } from '../Trending/styledComponents'
 import {SavedContainer, SavedImg} from './styleComponents'
-import {ListPara, BodyContainer} from '../Home/styleComponents'
+import {
+  ListPara,
+  BodyContainer,
+  LeftNavContainer,
+  ListItem,
+  Icons,
+  Paragraph,
+  Support,
+  MiniApps,
+} from '../Home/styleComponents'
+import NxtContext from '../../context/NxtContext'
 
 class SavedVideos extends Component {
   state = {savedArray: []}
@@ -32,6 +44,78 @@ class SavedVideos extends Component {
       <h1>No saved videos found</h1>
       <p>You can save your videos while watching them</p>
     </SavedContainer>
+  )
+
+  renderNavBar = () => (
+    <NxtContext.Consumer>
+      {value => {
+        const {isDark} = value
+
+        return (
+          <LeftNavContainer isDark={isDark}>
+            <ul>
+              <Link to="/" style={{textDecoration: 'none'}}>
+                <ListItem>
+                  <Icons type="button">
+                    <AiFillHome />
+                  </Icons>
+                  <Paragraph isDark={isDark}>Home</Paragraph>
+                </ListItem>
+              </Link>
+
+              <Link to="/trending" style={{textDecoration: 'none'}}>
+                <ListItem>
+                  <Icons type="button">
+                    <HiFire />
+                  </Icons>
+                  <Paragraph isDark={isDark}>Trending</Paragraph>
+                </ListItem>
+              </Link>
+
+              <Link to="/gaming" style={{textDecoration: 'none'}}>
+                <ListItem>
+                  <Icons type="button">
+                    <SiYoutubegaming />
+                  </Icons>
+                  <Paragraph isDark={isDark}>Gaming</Paragraph>
+                </ListItem>
+              </Link>
+
+              <Link to="/saved-videos" style={{textDecoration: 'none'}}>
+                <ListItem>
+                  <Icons type="button">
+                    <BiListPlus />
+                  </Icons>
+                  <Paragraph isDark={isDark}>Saved Videos</Paragraph>
+                </ListItem>
+              </Link>
+            </ul>
+            <Support>
+              <Paragraph isDark={isDark}>CONTACT US</Paragraph>
+
+              <div>
+                <MiniApps
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
+                  alt="facebook logo"
+                />
+
+                <MiniApps
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-twitter-logo-img.png"
+                  alt="twitter logo"
+                />
+                <MiniApps
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png"
+                  alt="linked in logo"
+                />
+              </div>
+              <Paragraph isDark={isDark}>
+                Enjoy! Now to see your channels and recommendations!
+              </Paragraph>
+            </Support>
+          </LeftNavContainer>
+        )
+      }}
+    </NxtContext.Consumer>
   )
 
   renderSuccessAllVideos = () => {
@@ -90,7 +174,7 @@ class SavedVideos extends Component {
         <ColContainer>
           <Header />
           <RowContainer>
-            <NavBar />
+            {this.renderNavBar()}
 
             <div>
               <RowCon>

@@ -5,10 +5,13 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 import Cookies from 'js-cookie'
 
-import {BiX} from 'react-icons/bi'
-import {BsSearch} from 'react-icons/bs'
-
 import {Link} from 'react-router-dom'
+import {AiFillHome} from 'react-icons/ai'
+import {HiFire} from 'react-icons/hi'
+import {SiYoutubegaming} from 'react-icons/si'
+import {BiListPlus, BiX} from 'react-icons/bi'
+
+import {BsSearch} from 'react-icons/bs'
 
 import {formatDistanceToNow} from 'date-fns'
 
@@ -31,9 +34,14 @@ import {
   SearchContainer,
   InputContainer,
   RetryBtn,
+  LeftNavContainer,
+  ListItem,
+  Icons,
+  Paragraph,
+  Support,
+  MiniApps,
 } from './styleComponents'
 import Header from '../Header'
-import LeftNav from '../NavBar'
 import {Bg} from '../Trending/styledComponents'
 import NxtContext from '../../context/NxtContext'
 
@@ -242,6 +250,78 @@ class Home extends Component {
     this.setState({searchIp: event.target.value})
   }
 
+  renderNavBar = () => (
+    <NxtContext.Consumer>
+      {value => {
+        const {isDark} = value
+
+        return (
+          <LeftNavContainer isDark={isDark}>
+            <ul>
+              <Link to="/" style={{textDecoration: 'none'}}>
+                <ListItem>
+                  <Icons type="button">
+                    <AiFillHome />
+                  </Icons>
+                  <Paragraph isDark={isDark}>Home</Paragraph>
+                </ListItem>
+              </Link>
+
+              <Link to="/trending" style={{textDecoration: 'none'}}>
+                <ListItem>
+                  <Icons type="button">
+                    <HiFire />
+                  </Icons>
+                  <Paragraph isDark={isDark}>Trending</Paragraph>
+                </ListItem>
+              </Link>
+
+              <Link to="/gaming" style={{textDecoration: 'none'}}>
+                <ListItem>
+                  <Icons type="button">
+                    <SiYoutubegaming />
+                  </Icons>
+                  <Paragraph isDark={isDark}>Gaming</Paragraph>
+                </ListItem>
+              </Link>
+
+              <Link to="/saved-videos" style={{textDecoration: 'none'}}>
+                <ListItem>
+                  <Icons type="button">
+                    <BiListPlus />
+                  </Icons>
+                  <Paragraph isDark={isDark}>Saved Videos</Paragraph>
+                </ListItem>
+              </Link>
+            </ul>
+            <Support>
+              <Paragraph isDark={isDark}>CONTACT US</Paragraph>
+
+              <div>
+                <MiniApps
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
+                  alt="facebook logo"
+                />
+
+                <MiniApps
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-twitter-logo-img.png"
+                  alt="twitter logo"
+                />
+                <MiniApps
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png"
+                  alt="linked in logo"
+                />
+              </div>
+              <Paragraph isDark={isDark}>
+                Enjoy! Now to see your channels and recommendations!
+              </Paragraph>
+            </Support>
+          </LeftNavContainer>
+        )
+      }}
+    </NxtContext.Consumer>
+  )
+
   render() {
     const {hide, searchIp} = this.state
     return (
@@ -253,7 +333,7 @@ class Home extends Component {
             <Bg isDark={isDark}>
               <Header />
               <RowContainer>
-                <LeftNav />
+                {this.renderNavBar()}
                 <div>
                   {hide && (
                     <BodyBoxContainer data-testid="banner">
